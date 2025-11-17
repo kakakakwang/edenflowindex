@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>이든플로우 | AI기반 성장 솔루션 - 정부지원금·정책자금·기업인증·MVP개발</title>
+  <meta name="description" content="기술로 잇고, 정책으로 성장합니다. AI기반 성장 솔루션으로 정부지원금, 정책자금, 연구소 설립, 벤처·메인비즈, 시설자금, 스마트공장, MVP(웹/앱) 개발까지 원스톱 지원.">
+  <meta name="theme-color" content="#d61c1e">
+
+  <!-- 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red: #d61c1e;
+      --brown: #b19665;
+      --beige: #efdcb1;
+      --dark: #373838;
+      --bg: #faf8f6;
+      --bg-warm: #f9f6f2;
+      --line: #ede7e2;
+      --white: #fff;
+      --ink: #222;
+      --muted: #6e6e6e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Pretendard', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 상단 공지 */
+    .notice {
+      background: var(--dark);
+      color: var(--white);
+      padding: 12px 20px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* 헤더 */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 248, 246, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      height: 40px;
+      width: auto;
+    }
+
+    .brand-name {
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: -0.3px;
+      color: var(--dark);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav a {
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: var(--ink);
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    nav a:hover {
+      background: var(--bg-warm);
+      color: var(--brown);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid transparent;
+      min-height: 44px;
+      transition: all 0.3s;
+    }
+
+    .btn.primary {
+      background: var(--brown);
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(177, 150, 101, 0.2);
+    }
+
+    .btn.primary:hover {
+      background: #9a8156;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(177, 150, 101, 0.3);
+    }
+
+    .btn.line {
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      color: #fff;
+    }
+
+    .btn.line:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* 히어로 슬라이드 */
+    .hero {
+      position: relative;
+      color: var(--white);
+      padding: 96px 20px 72px;
+      overflow: hidden;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-slider {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(55, 56, 56, 0.75), rgba(55, 56, 56, 0.85));
+      z-index: 1;
+    }
+
+    .slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .slide:nth-child(1) {
+      background-image: url('회의실.jpg');
+    }
+
+    .slide:nth-child(2) {
+      background-image: url('악수.jpg');
+    }
+
+    .slide:nth-child(3) {
+      background-image: url('테헤란로.jpg');
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .dot:hover {
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(1.2);
+    }
+
+    .dot.active {
+      background: var(--beige);
+      width: 32px;
+      border-radius: 5px;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 32px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .slide-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 1240px;
+      padding: 0 20px;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+      pointer-events: none;
+    }
+
+    .slide-content.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(239, 220, 177, 0.2);
+      border: 1px solid rgba(239, 220, 177, 0.4);
+      color: var(--white);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .h1 {
+      font-weight: 900;
+      font-size: 44px;
+      line-height: 1.22;
+      margin: 10px 0 12px;
+      color: var(--white);
+    }
+
+    .lead {
+      color: var(--white);
+      opacity: 0.95;
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .card h3 {
+      color: var(--white);
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      color: var(--white);
+    }
+
+    .card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--beige);
+      font-weight: 900;
+    }
+
+    /* 섹션 */
+    .section {
+      padding: 72px 20px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section h2 {
+      font-weight: 900;
+      font-size: 32px;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* 신뢰 지표 */
+    .stats {
+      background: var(--white);
+      padding: 56px 20px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stat {
+      text-align: center;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .stat:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      transform: translateY(-2px);
+      border-color: var(--brown);
+    }
+
+    .stat .n {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--brown);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stat .l {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    /* AI 솔루션 */
+    .ai-section {
+      background: var(--bg);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature {
+      position: relative;
+      color: var(--white);
+      border-radius: 16px;
+      padding: 40px 32px;
+      min-height: 360px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s;
+      overflow: hidden;
+    }
+
+    .feature::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5);
+      z-index: 0;
+      transition: all 0.5s;
+    }
+
+    .feature::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(55, 56, 56, 0.7), rgba(55, 56, 56, 0.85));
+      z-index: 1;
+    }
+
+    .feature:nth-child(1)::before {
+      background-image: url('AI 정책자금 매칭.jpg');
+    }
+
+    .feature:nth-child(2)::before {
+      background-image: url('AI 인증컨설팅.png');
+    }
+
+    .feature:nth-child(3)::before {
+      background-image: url('AI 성장 로드맵 구축.png');
+    }
+
+    .feature:nth-child(4)::before {
+      background-image: url('AI 기반 R&D MVP 기획.jpg');
+    }
+
+    .feature:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    .feature:hover::before {
+      filter: brightness(0.6);
+      transform: scale(1.05);
+    }
+
+    .feature > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature .icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature .title {
+      font-weight: 900;
+      margin-bottom: 24px;
+      font-size: 24px;
+      line-height: 1.3;
+    }
+
+    .feature .subtitle-text {
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .feature .desc {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    /* 비교 테이블 */
+    .comparison-section {
+      padding: 80px 20px;
+      background: linear-gradient(135deg, var(--dark) 0%, #2a2b2b 100%);
+      color: var(--white);
+    }
+
+    .comparison-table {
+      width: 100%;
+      max-width: 1200px;
+      margin: 40px auto 0;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .comparison-table th {
+      background: rgba(0, 0, 0, 0.2);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .comparison-table td {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comparison-table td:first-child {
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .comparison-table .edenflow-col {
+      background: rgba(177, 150, 101, 0.1);
+      border-left: 2px solid rgba(177, 150, 101, 0.3);
+      border-right: 2px solid rgba(177, 150, 101, 0.3);
+    }
+
+    .comparison-table .edenflow-col span {
+      font-weight: 700;
+      color: var(--beige);
+    }
+
+    .check-icon {
+      color: var(--brown);
+      font-weight: bold;
+    }
+
+    .x-icon {
+      opacity: 0.5;
+    }
+
+    /* 서비스 카드 */
+    .services-visual {
+      background: var(--white);
+    }
+
+    .service-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .svc-card {
+      position: relative;
+      border-radius: 16px;
+      padding: 40px 24px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+      color: var(--white);
+      text-align: center;
+      overflow: hidden;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .svc-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5);
+      z-index: 0;
+      transition: all 0.5s;
+    }
+
+    .svc-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(55, 56, 56, 0.3), rgba(55, 56, 56, 0.85));
+      z-index: 1;
+    }
+
+    .svc-card:nth-child(1)::before {
+      background-image: url('정책자금.jpg');
+    }
+
+    .svc-card:nth-child(2)::before {
+      background-image: url('정부지원금.jpg');
+    }
+
+    .svc-card:nth-child(3)::before {
+      background-image: url('기업인증.jpg');
+    }
+
+    .svc-card:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      transform: translateY(-6px);
+    }
+
+    .svc-card:hover::before {
+      filter: brightness(0.6);
+      transform: scale(1.05);
+    }
+
+    .svc-title {
+      position: relative;
+      z-index: 2;
+      font-weight: 900;
+      font-size: 23px;
+      margin-bottom: 12px;
+    }
+
+    .svc-desc {
+      position: relative;
+      z-index: 2;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    /* 서비스 상세 */
+    .services-detail {
+      background: var(--bg);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .svc-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+
+    .svc-item:hover {
+      border-color: var(--brown);
+      background: var(--bg-warm);
+      transform: scale(1.02);
+    }
+
+    .svc-item .num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--brown);
+      color: var(--white);
+      font-weight: 900;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* 프로세스 */
+    .process-section {
+      background: var(--white);
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .step {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--brown);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .step:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .step:hover::before {
+      transform: scaleX(1);
+    }
+
+    .step .n {
+      font-weight: 900;
+      color: var(--brown);
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .step .t {
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-size: 16px;
+    }
+
+    .step .d {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* 성공사례 */
+    .cases-section {
+      background: var(--bg);
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .case {
+      position: relative;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      min-height: 320px;
+      transition: all 0.3s;
+      color: var(--white);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .case::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5);
+      z-index: 0;
+      transition: all 0.5s;
+    }
+
+    .case::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(55, 56, 56, 0.3), rgba(55, 56, 56, 0.9));
+      z-index: 1;
+    }
+
+    .case:nth-child(1)::before {
+      background-image: url('청년스타트업.jpg');
+    }
+
+    .case:nth-child(2)::before {
+      background-image: url('IT서비스업.jpg');
+    }
+
+    .case:nth-child(3)::before {
+      background-image: url('제조업.jpg');
+    }
+
+    .case:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      transform: translateY(-6px);
+    }
+
+    .case:hover::before {
+      filter: brightness(0.6);
+      transform: scale(1.05);
+    }
+
+    .case > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .case .cat {
+      color: var(--beige);
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 12px;
+    }
+
+    .case .title {
+      font-weight: 900;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .case ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .case li {
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .case li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--beige);
+      font-weight: 900;
+    }
+
+    /* FAQ */
+    .faq-section {
+      background: var(--white);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .faq-item:hover {
+      border-color: var(--brown);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .faq-q {
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .faq-q::before {
+      content: 'Q. ';
+      color: var(--brown);
+      font-weight: 900;
+    }
+
+    .faq-a {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      padding-left: 20px;
+    }
+
+    /* 폼 */
+    .contact-section {
+      background: var(--bg);
+    }
+
+    .contact-form {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 15px;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--brown);
+      box-shadow: 0 0 0 3px rgba(177, 150, 101, 0.1);
+      background: var(--white);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--bg-warm);
+      border: 1px solid var(--line);
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .consent input[type="checkbox"] {
+      width: auto;
+      margin-top: 3px;
+      cursor: pointer;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .form-msg {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    /* 푸터 */
+    footer {
+      background: var(--dark);
+      color: var(--white);
+      padding: 48px 20px 32px;
+      border-top: 4px solid var(--brown);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto 32px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .footer-brand img {
+      height: 36px;
+      width: auto;
+    }
+
+    .footer-brand-text {
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .footer-slogan {
+      color: var(--beige);
+      font-weight: 700;
+      margin-bottom: 14px;
+      font-size: 15px;
+    }
+
+    .footer-info {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .footer-title {
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .footer-links a {
+      display: block;
+      color: rgba(255, 255, 255, 0.85);
+      padding: 5px 0;
+      transition: all 0.3s;
+      font-size: 14px;
+    }
+
+    .footer-links a:hover {
+      color: var(--beige);
+      padding-left: 4px;
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 20px;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      font-size: 13px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Sticky CTA */
+    .sticky-cta {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .floating-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 50px;
+      background: var(--brown);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 15px;
+      box-shadow: 0 4px 20px rgba(177, 150, 101, 0.35);
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      min-height: 50px;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 28px rgba(177, 150, 101, 0.45);
+      background: #9a8156;
+    }
+
+    .floating-btn.kakao {
+      background: #FEE500;
+      color: #3C1E1E;
+      box-shadow: 0 4px 20px rgba(254, 229, 0, 0.35);
+    }
+
+    .floating-btn.kakao:hover {
+      background: #FDD835;
+      box-shadow: 0 6px 28px rgba(254, 229, 0, 0.45);
+    }
+
+    /* 반응형 */
+    @media (max-width: 920px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .h1 {
+        font-size: 32px;
+      }
+
+      .form {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 공지 -->
+  <div class="notice">
+    🔔 2026년 분기 접수 진행 중 · AI 진단 후 우선순위 안내
+  </div>
+
+  <!-- 헤더 -->
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <img src="이든플로우_로고_1.png" alt="이든플로우 로고">
+        <div class="brand-name">EDENFLOW</div>
+      </div>
+      <nav>
+        <a href="#ai">AI 솔루션</a>
+        <a href="#services">서비스</a>
+        <a href="#process">프로세스</a>
+        <a href="#cases">성공사례</a>
+        <a href="#contact" class="btn primary">무료상담</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 히어로 -->
+  <section class="hero" id="main">
+    <div class="hero-slider">
+      <div class="slide active"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+    </div>
+    <div class="slider-dots">
+      <span class="dot active" data-slide="0"></span>
+      <span class="dot" data-slide="1"></span>
+      <span class="dot" data-slide="2"></span>
+    </div>
+
+    <!-- 슬라이드 1 콘텐츠 -->
+    <div class="slide-content active" data-content="0">
+      <div class="hero-grid">
+        <div>
+          <div class="tag">AI기반 성장 솔루션</div>
+          <h1 class="h1">기술로 잇고,<br>정책으로 성장합니다</h1>
+          <p class="lead">정부지원금 · 정책자금 · 연구소 설립 · 벤처/메인비즈 · 시설자금 · 스마트공장 · MVP(웹/앱) 개발까지 원스톱</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+            <a href="#contact" class="btn primary">무료 컨설팅 신청</a>
+            <a href="tel:1600-6887" class="btn line">📞 1600-6887</a>
+          </div>
+          <div class="small" style="margin-top:12px;color:var(--white);opacity:.9">⏰ 평균 24시간 내 회신</div>
+        </div>
+        <div class="card">
+          <h3>이든플로우 핵심 지원</h3>
+          <ul>
+            <li>정부지원금 · 정책자금 매칭</li>
+            <li>기업부설연구소 · 벤처 · 메인비즈</li>
+            <li>시설자금 · 스마트공장 로드맵</li>
+            <li>MVP(웹/앱) 개발 기획-제작</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 슬라이드 2 콘텐츠 -->
+    <div class="slide-content" data-content="1">
+      <div class="hero-grid">
+        <div>
+          <div class="tag">선정률 92% 이상</div>
+          <h1 class="h1">AI 빅데이터로<br>선정 가능성을 예측합니다</h1>
+          <p class="lead">2,156개 기업 컨설팅 데이터 분석으로 가장 확실한 정부지원금과 정책자금을 매칭하여 성공률을 극대화합니다</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+            <a href="#ai" class="btn primary">AI 진단 시작하기</a>
+            <a href="#cases" class="btn line">성공사례 보기</a>
+          </div>
+          <div class="small" style="margin-top:12px;color:var(--white);opacity:.9">📊 빅데이터 기반 선정률 예측</div>
+        </div>
+        <div class="card">
+          <h3>AI 분석 시스템</h3>
+          <ul>
+            <li>기업 현황 정밀 진단</li>
+            <li>맞춤형 정책자금 매칭</li>
+            <li>선정 가능성 사전 예측</li>
+            <li>보완점 구체적 가이드</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 슬라이드 3 콘텐츠 -->
+    <div class="slide-content" data-content="2">
+      <div class="hero-grid">
+        <div>
+          <div class="tag">누적 247억원 지원 성공</div>
+          <h1 class="h1">검증된 실력으로<br>기업 성장을 지원합니다</h1>
+          <p class="lead">스타트업부터 제조업까지 다양한 업종에서 정부지원금 확보, 인증 획득, MVP 개발을 성공적으로 완료했습니다</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+            <a href="#contact" class="btn primary">무료 상담 신청</a>
+            <a href="#faq" class="btn line">자주 묻는 질문</a>
+          </div>
+          <div class="small" style="margin-top:12px;color:var(--white);opacity:.9">💼 다양한 업종 성공 경험</div>
+        </div>
+        <div class="card">
+          <h3>신뢰할 수 있는 파트너</h3>
+          <ul>
+            <li>누적 컨설팅 2,156+ 건</li>
+            <li>평균 선정률 92% 달성</li>
+            <li>누적 지원금 247억원</li>
+            <li>사후관리까지 완벽 지원</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 신뢰 지표 -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat">
+        <span class="n" data-target="2156" data-suffix="+">0</span>
+        <span class="l">누적 컨설팅</span>
+      </div>
+      <div class="stat">
+        <span class="n" data-target="92" data-suffix="%">0</span>
+        <span class="l">평균 선정률</span>
+      </div>
+      <div class="stat">
+        <span class="n" data-target="247" data-suffix="억">0</span>
+        <span class="l">누적 지원금</span>
+      </div>
+      <div class="stat">
+        <span class="n" data-target="24" data-suffix="H">0</span>
+        <span class="l">평균 응답</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI 솔루션 -->
+  <section id="ai" class="section ai-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>AI 기반 원스톱 성장 솔루션</h2>
+        <p class="subtitle">빅데이터·머신러닝으로 기업 성장에 필요한 모든 전략을 추천하고 실행합니다.</p>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="icon">🎯</div>
+          <div class="title">AI 정책자금 매칭</div>
+          <div class="subtitle-text">AI 기업 진단</div>
+          <div class="desc">기업 데이터를 정밀 분석하여 가능한 정부지원금, 정책자금 매칭</div>
+          <div class="subtitle-text">선정률 예측</div>
+          <div class="desc">빅데이터 기반으로 지원 사업의 선정 가능성을 미리 예측하고 보완점을 가이드</div>
+        </div>
+        <div class="feature">
+          <div class="icon">🏆</div>
+          <div class="title">AI 인증/컨설팅</div>
+          <div class="subtitle-text">최적 인증 추천</div>
+          <div class="desc">기업부설연구소, 벤처, 메인비즈 등 기업 가치를 높이는 필수 인증 AI 추천</div>
+          <div class="subtitle-text">성공/실패 사례 분석</div>
+          <div class="desc">유사 기업의 성공 및 리스크 데이터를 분석하여 가장 확실한 인증 획득 전략 제시</div>
+        </div>
+        <div class="feature">
+          <div class="icon">📈</div>
+          <div class="title">AI 성장 로드맵 구축</div>
+          <div class="subtitle-text">스마트공장/시설자금</div>
+          <div class="desc">정부과제, 인증, 자금 확보, 개발(MVP) 단계 조합, 시설자금 및 스마트공장 도입을 위한 최적의 로드맵 설계</div>
+          <div class="subtitle-text">단계별 실행 관리</div>
+          <div class="desc">기업 현황에 맞춰 가장 효율적인 실행 순서와 조합 추천</div>
+        </div>
+        <div class="feature">
+          <div class="icon">💡</div>
+          <div class="title">AI 기반 R&D/MVP 기획</div>
+          <div class="subtitle-text">정부과제 연계 기획</div>
+          <div class="desc">정부지원금 확보가 용이한 R&D 과제, MVP(웹/앱) 개발을 AI 분석을 통해 체계적으로 기획</div>
+          <div class="subtitle-text">기술/시장 분석</div>
+          <div class="desc">AI 활용 타겟 시장과 경쟁 기술 분석으로 사업 계획의 성공률 극대화</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 비교 테이블 -->
+  <section class="comparison-section">
+    <div class="section-header">
+      <h2 style="color:var(--white)">왜 이든플로우일까요?</h2>
+      <p class="subtitle" style="color:rgba(255,255,255,.8)">데이터 기반의 압도적인 차이를 경험하세요</p>
+    </div>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>타사 A</th>
+          <th class="edenflow-col">이든플로우</th>
+          <th>타사 B</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>지원 대상</td>
+          <td>정책자금 위주</td>
+          <td class="edenflow-col"><span>정책자금 + 창업·R&D 지원금 + 기업인증</span></td>
+          <td>일부 R&D 지원금</td>
+        </tr>
+        <tr>
+          <td>컨설팅 방식</td>
+          <td>경험 기반</td>
+          <td class="edenflow-col"><span>AI 데이터 분석 기반</span></td>
+          <td>템플릿 위주</td>
+        </tr>
+        <tr>
+          <td>사업계획서</td>
+          <td class="x-icon">X</td>
+          <td class="edenflow-col"><span>1년에 최소 3건, 무제한 지원</span></td>
+          <td class="x-icon">X</td>
+        </tr>
+        <tr>
+          <td>성공률</td>
+          <td>업체별 상이</td>
+          <td class="edenflow-col"><span class="check-icon">✓</span> <span>92% 이상</span></td>
+          <td>비공개</td>
+        </tr>
+        <tr>
+          <td>맞춤 전략</td>
+          <td class="x-icon">△</td>
+          <td class="edenflow-col"><span class="check-icon">✓</span> <span>기업별 최적 로드맵</span></td>
+          <td class="x-icon">△</td>
+        </tr>
+        <tr>
+          <td>사후 관리</td>
+          <td class="x-icon">X</td>
+          <td class="edenflow-col"><span class="check-icon">✓</span> <span>정산·성과관리 지원</span></td>
+          <td class="x-icon">X</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 핵심 서비스 -->
+  <section id="services" class="section services-visual">
+    <div class="container">
+      <div class="section-header">
+        <h2>핵심 서비스</h2>
+        <p class="subtitle">기업 성장 목적에 맞춘 현실적 조합을 설계합니다</p>
+      </div>
+      <div class="service-cards">
+        <a class="svc-card" href="#contact">
+          <div class="svc-title">정책자금(보증·대출)</div>
+          <p class="svc-desc">중진공·신보·기보, 초저금리 자금조달</p>
+        </a>
+        <a class="svc-card" href="#contact">
+          <div class="svc-title">정부지원금</div>
+          <p class="svc-desc">R&D/바우처/수출 무상지원 매칭</p>
+        </a>
+        <a class="svc-card" href="#contact">
+          <div class="svc-title">기업인증 지원</div>
+          <p class="svc-desc">연구소 · 벤처 · 메인비즈 · 이노비즈</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 서비스 상세 -->
+  <section class="section services-detail">
+    <div class="container">
+      <div class="section-header">
+        <h2>이든플로우 서비스 전체</h2>
+        <p class="subtitle">정부지원부터 기술개발까지 Total Solution</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-item"><span class="num">01</span>정부지원금</div>
+        <div class="svc-item"><span class="num">02</span>정책자금</div>
+        <div class="svc-item"><span class="num">03</span>기업부설연구소</div>
+        <div class="svc-item"><span class="num">04</span>벤처인증</div>
+        <div class="svc-item"><span class="num">05</span>메인비즈</div>
+        <div class="svc-item"><span class="num">06</span>이노비즈</div>
+        <div class="svc-item"><span class="num">07</span>시설자금</div>
+        <div class="svc-item"><span class="num">08</span>스마트공장</div>
+        <div class="svc-item"><span class="num">09</span>MVP 웹개발</div>
+        <div class="svc-item"><span class="num">10</span>MVP 앱개발</div>
+        <div class="svc-item"><span class="num">11</span>R&D 컨설팅</div>
+        <div class="svc-item"><span class="num">12</span>수출바우처</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 프로세스 -->
+  <section id="process" class="section process-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>컨설팅 진행 절차</h2>
+        <p class="subtitle">체계적 5단계로 빠르고 정확하게 진행합니다</p>
+      </div>
+      <div class="process">
+        <div class="step">
+          <div class="n">01</div>
+          <div class="t">AI 진단</div>
+          <div class="d">현황 분석 · 가능성/우선순위 도출</div>
+        </div>
+        <div class="step">
+          <div class="n">02</div>
+          <div class="t">전략 수립</div>
+          <div class="d">프로그램 조합 · 일정 · 리스크 설계</div>
+        </div>
+        <div class="step">
+          <div class="n">03</div>
+          <div class="t">서류 준비</div>
+          <div class="d">신청서/증빙 작성 · 가점 관리</div>
+        </div>
+        <div class="step">
+          <div class="n">04</div>
+          <div class="t">신청/평가</div>
+          <div class="d">접수 · 면담/평가 대응</div>
+        </div>
+        <div class="step">
+          <div class="n">05</div>
+          <div class="t">사후관리</div>
+          <div class="d">협약 · 집행 · 정산 · 성과관리</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 고객 성공사례 -->
+  <section id="cases" class="section cases-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>고객 성공사례</h2>
+        <p class="subtitle">업종·단계별로 최적의 대안을 제시합니다</p>
+      </div>
+      <div class="cases-grid">
+        <div class="case">
+          <div class="cat">청년 스타트업</div>
+          <div class="title">AI 스타트업 A사</div>
+          <ul>
+            <li>청년창업·운전자금 1.3억원 확보</li>
+            <li>청년사관학교 8천만원 선정</li>
+          </ul>
+        </div>
+        <div class="case">
+          <div class="cat">IT 서비스업</div>
+          <div class="title">플랫폼 기업 B사</div>
+          <ul>
+            <li>R&D 과제 5천만원 선정</li>
+            <li>마케팅/수출 바우처 연계</li>
+          </ul>
+        </div>
+        <div class="case">
+          <div class="cat">제조업</div>
+          <div class="title">스마트제조 C사</div>
+          <ul>
+            <li>시설자금 1억원 승인</li>
+            <li>스마트공장 1억원 구축</li>
+          </ul>
+        </div>
+      </div>
+      <div class="small" style="margin-top:16px;text-align:center;color:var(--muted)">모든 결과는 기업별 조건과 공고 상황에 따라 달라질 수 있습니다.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section faq-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>자주 묻는 질문</h2>
+        <p class="subtitle">궁금하신 점을 확인해보세요</p>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-q">AI 기반 솔루션은 무엇이 다른가요?</div>
+          <div class="faq-a">데이터 기반으로 가능성이 높은 조합을 우선 제시하고, 공고/평가 특성에 맞춤 대응합니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">신용이 낮아도 가능한가요?</div>
+          <div class="faq-a">보증/대출형은 영향이 있으나, 무상지원(바우처/R&D)과 인증을 조합하여 대안을 설계합니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">기간과 수수료는 어떻게 되나요?</div>
+          <div class="faq-a">바우처 1~3주, 정책자금 2~4주, R&D는 공고~평가 일정에 따릅니다. 수수료는 유형/난이도/성과 기준으로 협의합니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">스타트업도 지원 가능한가요?</div>
+          <div class="faq-a">예비창업자부터 창업 7년 이내 기업까지 다양한 프로그램이 있습니다. TIPS, 창업지원금 등 맞춤형 안내를 제공합니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">어떤 서류가 필요한가요?</div>
+          <div class="faq-a">기본적으로 사업자등록증, 재무제표, 사업계획서 등이 필요하며, 프로그램별로 추가 서류가 다릅니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">MVP 개발도 지원하나요?</div>
+          <div class="faq-a">네, 정부지원금을 활용한 MVP(웹/앱) 개발을 지원합니다. 프로토타입부터 실제 서비스 론칭까지 함께합니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 상담 신청 -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>무료 상담 신청</h2>
+        <p class="subtitle">AI가 분석한 맞춤 지원 프로그램을 24시간 내 안내드립니다</p>
+      </div>
+      <form id="consultForm" class="contact-form">
+        <div class="form">
+          <div>
+            <label for="name">성함 <span style="color:var(--brown)">*</span></label>
+            <input id="name" name="name" required placeholder="홍길동">
+          </div>
+          <div>
+            <label for="phone">연락처 <span style="color:var(--brown)">*</span></label>
+            <input id="phone" name="phone" required placeholder="010-0000-0000">
+          </div>
+          <div>
+            <label for="company">회사명</label>
+            <input id="company" name="company" placeholder="이든플로우">
+          </div>
+          <div>
+            <label for="email">이메일</label>
+            <input id="email" name="email" type="email" placeholder="edenflow3@gmail.com">
+          </div>
+          <div>
+            <label for="bizType">사업 형태</label>
+            <select id="bizType" name="bizType">
+              <option value="">선택</option>
+              <option>예비창업</option>
+              <option>개인사업자</option>
+              <option>법인사업자</option>
+            </select>
+          </div>
+          <div>
+            <label for="industry">업종</label>
+            <select id="industry" name="industry">
+              <option value="">선택</option>
+              <option>IT/소프트웨어</option>
+              <option>제조업</option>
+              <option>서비스업</option>
+              <option>유통/도소매</option>
+              <option>바이오/헬스케어</option>
+              <option>기타</option>
+            </select>
+          </div>
+          <div class="full">
+            <label>관심 서비스 (복수 선택)</label>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:8px">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600">
+                <input type="checkbox" name="services" value="정부지원금" style="width:18px;height:18px;cursor:pointer">
+                정부지원금
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600">
+                <input type="checkbox" name="services" value="정책자금" style="width:18px;height:18px;cursor:pointer">
+                정책자금
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600">
+                <input type="checkbox" name="services" value="연구소설립" style="width:18px;height:18px;cursor:pointer">
+                연구소설립
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600">
+                <input type="checkbox" name="services" value="벤처" style="width:18px;height:18px;cursor:pointer">
+                벤처
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600">
+                <input type="checkbox" name="services" value="메인비즈" style="width:18px;height:18px;cursor:pointer">
+                메인비즈
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600">
+                <input type="checkbox" name="services" value="시설자금" style="width:18px;height:18px;cursor:pointer">
+                시설자금
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600">
+                <input type="checkbox" name="services" value="스마트공장" style="width:18px;height:18px;cursor:pointer">
+                스마트공장
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600">
+                <input type="checkbox" name="services" value="MVP개발" style="width:18px;height:18px;cursor:pointer">
+                MVP개발
+              </label>
+            </div>
+          </div>
+          <div class="full">
+            <label for="message">문의사항</label>
+            <textarea id="message" name="message" placeholder="필요하신 지원/현황을 간단히 적어주세요."></textarea>
+          </div>
+          <div class="full consent">
+            <input type="checkbox" id="consent" required>
+            <label for="consent" class="small" style="cursor:pointer">
+              <strong>[필수]</strong> 개인정보 수집·이용에 동의합니다. (수집항목: 성함, 연락처, 회사/이메일, 상담내용. 이용목적: 상담 및 안내. 보유기간: 접수일로부터 1년 또는 동의 철회 시 즉시 파기.)
+            </label>
+          </div>
+          <div class="full" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <button class="btn primary" type="submit">AI 진단 시작하기</button>
+            <div id="formMsg" class="form-msg"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="이든플로우_로고_2.png" alt="이든플로우 로고">
+          <div class="footer-brand-text">EDENFLOW</div>
+        </div>
+        <div class="footer-slogan">기술로 잇고, 정책으로 성장합니다</div>
+        <div class="footer-info">
+          대표: 여광<br>
+          전화: 1600-6887 | 팩스: 0504-362-0692<br>
+          이메일: edenflow3@gmail.com<br>
+          주소: 서울특별시 강서구 공항대로 525, 1501호<br>
+          사업자등록번호: 601-39-22165
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">서비스</div>
+        <div class="footer-links">
+          <a href="#services">정부지원금</a>
+          <a href="#services">정책자금</a>
+          <a href="#services">기업인증</a>
+          <a href="#services">MVP개발</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">고객지원</div>
+        <div class="footer-links">
+          <a href="#faq">FAQ</a>
+          <a href="#contact">무료상담</a>
+          <a href="tel:1600-6887">전화문의</a>
+          <a href="mailto:edenflow3@gmail.com">이메일문의</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      © <span id="year"></span> EDENFLOW. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- 플로팅 CTA -->
+  <div class="sticky-cta">
+    <a href="tel:1600-6887" class="floating-btn">
+      📞 <span>전화 상담</span>
+    </a>
+    <a href="https://open.kakao.com/o/sFYpJcXh" class="floating-btn kakao" target="_blank" rel="noopener">
+      💬 <span>카카오톡 상담</span>
+    </a>
+  </div>
+
+  <script>
+    // 연도 자동 업데이트
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 히어로 슬라이더
+    (function() {
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
+      const contents = document.querySelectorAll('.slide-content');
+      let currentSlide = 0;
+      let slideInterval;
+
+      function showSlide(index) {
+        // 범위 체크
+        if (index >= slides.length) index = 0;
+        if (index < 0) index = slides.length - 1;
+
+        // 모든 슬라이드, 점, 콘텐츠에서 active 제거
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        contents.forEach(content => content.classList.remove('active'));
+
+        // 현재 슬라이드, 점, 콘텐츠에 active 추가
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        contents[index].classList.add('active');
+
+        currentSlide = index;
+      }
+
+      function nextSlide() {
+        showSlide(currentSlide + 1);
+      }
+
+      function startAutoSlide() {
+        slideInterval = setInterval(nextSlide, 3000);
+      }
+
+      function stopAutoSlide() {
+        clearInterval(slideInterval);
+      }
+
+      // 점 클릭 이벤트
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          stopAutoSlide();
+          showSlide(index);
+          startAutoSlide();
+        });
+      });
+
+      // 슬라이더에 마우스 오버시 자동 슬라이드 정지
+      const heroSection = document.querySelector('.hero');
+      heroSection.addEventListener('mouseenter', stopAutoSlide);
+      heroSection.addEventListener('mouseleave', startAutoSlide);
+
+      // 초기화
+      showSlide(0);
+      startAutoSlide();
+    })();
+
+    // 통계 카운팅 애니메이션
+    (function() {
+      const counters = document.querySelectorAll('.stats .n');
+      let counted = false;
+
+      function animateCounter(el) {
+        const target = parseInt(el.dataset.target || '0', 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1200;
+        const start = performance.now();
+
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const current = Math.floor(target * progress);
+          el.textContent = current.toLocaleString('ko-KR') + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !counted) {
+            counted = true;
+            counters.forEach(animateCounter);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      if (counters.length) {
+        observer.observe(document.querySelector('.stats'));
+      }
+    })();
+
+    // 전화번호 자동 포맷
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', (e) => {
+        let v = e.target.value.replace(/[^0-9]/g, '');
+        if (v.length > 3 && v.length <= 7) {
+          v = v.slice(0, 3) + '-' + v.slice(3);
+        } else if (v.length > 7) {
+          v = v.slice(0, 3) + '-' + v.slice(3, 7) + '-' + v.slice(7, 11);
+        }
+        e.target.value = v;
+      });
+    }
+
+    // 폼 제출
+    const form = document.getElementById('consultForm');
+    const msg = document.getElementById('formMsg');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        // 선택된 관심 서비스들 수집
+        const selectedServices = Array.from(document.querySelectorAll('input[name="services"]:checked'))
+          .map(checkbox => checkbox.value);
+
+        const data = {
+          name: formData.get('name'),
+          phone: formData.get('phone'),
+          email: formData.get('email'),
+          company: formData.get('company'),
+          bizType: formData.get('bizType'),
+          industry: formData.get('industry'),
+          services: selectedServices.join(', '),
+          message: formData.get('message'),
+          consent: document.getElementById('consent').checked
+        };
+
+        const phoneRe = /^01[0-9]-?\d{3,4}-?\d{4}$/;
+        if (!data.name || !data.phone || !data.consent) {
+          msg.textContent = '필수 항목을 모두 입력해주세요.';
+          return;
+        }
+
+        if (!phoneRe.test(data.phone.replace(/-/g, ''))) {
+          msg.textContent = '올바른 전화번호 형식을 입력해주세요.';
+          return;
+        }
+
+        try {
+          // Google Apps Script 엔드포인트
+          const endpoint = 'https://script.google.com/macros/s/AKfycbyyO76FdGhUXIiHgpcUWtTj5Flg0QRLUMD1l7_71L4TiPmu63ZSSHw97Y2xxM_xjbkRbQ/exec';
+
+          await fetch(endpoint, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' },
+            mode: 'no-cors'
+          });
+
+          msg.textContent = '✓ 상담 신청이 접수되었습니다. 24시간 내 연락드립니다.';
+          msg.style.color = 'var(--brown)';
+          form.reset();
+        } catch (error) {
+          msg.textContent = '일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+          msg.style.color = 'var(--red)';
+        }
+      });
+    }
+
+    // 부드러운 스크롤
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
