@@ -905,9 +905,160 @@
       font-weight: 900;
     }
 
+    /* 대표 소개 섹션 */
+    .ceo-section {
+      background: var(--white);
+      padding: 72px 20px;
+    }
+
+    .ceo-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .ceo-image-wrapper {
+      width: 100%;
+      height: 100%;
+      min-height: 600px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .ceo-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .ceo-content {
+      padding: 20px 0;
+    }
+
+    .ceo-badge {
+      display: inline-block;
+      background: var(--brown);
+      color: var(--white);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .ceo-name {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .ceo-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: 24px;
+    }
+
+    .ceo-intro {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .ceo-highlights {
+      background: var(--bg);
+      border-left: 4px solid var(--brown);
+      padding: 20px 24px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .ceo-highlights h4 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .ceo-highlights ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .ceo-highlights li {
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .ceo-highlights li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--brown);
+      font-weight: 900;
+    }
+
+    /* 반응형: 태블릿 */
+    @media (max-width: 920px) {
+      .ceo-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .ceo-image-wrapper {
+        min-height: 500px;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .ceo-name {
+        font-size: 28px;
+      }
+    }
+
+    /* 반응형: 모바일 */
+    @media (max-width: 600px) {
+      .ceo-image-wrapper {
+        min-height: 400px;
+        aspect-ratio: 3 / 4;
+      }
+
+      .ceo-content {
+        padding: 0;
+      }
+
+      .ceo-name {
+        font-size: 24px;
+      }
+
+      .ceo-title {
+        font-size: 16px;
+      }
+
+      .ceo-intro {
+        font-size: 15px;
+      }
+
+      .ceo-highlights {
+        padding: 16px 20px;
+      }
+    }
+
     /* FAQ */
     .faq-section {
-      background: var(--white);
+      background: var(--bg);
     }
 
     .faq-grid {
@@ -919,7 +1070,7 @@
     }
 
     .faq-item {
-      background: var(--bg);
+      background: var(--white);
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 22px;
@@ -956,13 +1107,13 @@
 
     /* 폼 */
     .contact-section {
-      background: var(--bg);
+      background: var(--white);
     }
 
     .contact-form {
       max-width: 900px;
       margin: 0 auto;
-      background: var(--white);
+      background: var(--bg);
       border: 1px solid var(--line);
       border-radius: 20px;
       padding: 40px;
@@ -994,7 +1145,7 @@
       padding: 12px 14px;
       border: 1px solid var(--line);
       border-radius: 10px;
-      background: var(--bg);
+      background: var(--white);
       color: var(--ink);
       font-size: 15px;
       transition: all 0.3s;
@@ -1538,6 +1689,46 @@
         </div>
       </div>
       <div class="small" style="margin-top:16px;text-align:center;color:var(--muted)">모든 결과는 기업별 조건과 공고 상황에 따라 달라질 수 있습니다.</div>
+    </div>
+  </section>
+
+  <!-- 대표 소개 -->
+  <section class="ceo-section">
+    <div class="container">
+      <div class="ceo-container">
+        <div class="ceo-image-wrapper">
+          <img src="https://i.ifh.cc/dJTov3.jpg" alt="여광 대표">
+        </div>
+        <div class="ceo-content">
+          <div class="ceo-badge">EDENFLOW CEO</div>
+          <h3 class="ceo-name">여광 대표</h3>
+          <p class="ceo-title">이든플로우 대표이사 · 정책지도사</p>
+          
+          <p class="ceo-intro">
+            2,156개 기업의 성장을 함께 해온 경험과 AI 기반 빅데이터 분석을 통해, 
+            가장 확실한 정부지원금 확보 전략을 제공합니다. 
+            단순한 컨설팅을 넘어, 기업의 지속 가능한 성장 로드맵을 함께 설계하는 것이 
+            이든플로우의 철학입니다.
+          </p>
+
+          <div class="ceo-highlights">
+            <h4>핵심 역량</h4>
+            <ul>
+              <li>누적 247억원 정부지원금 확보 성공</li>
+              <li>평균 선정률 92% 달성</li>
+              <li>AI 기반 맞춤형 정책자금 매칭 시스템 구축</li>
+              <li>기업부설연구소·벤처·메인비즈 인증 전문가</li>
+              <li>스마트공장·시설자금·MVP 개발 통합 컨설팅</li>
+            </ul>
+          </div>
+
+          <p class="ceo-intro">
+            "기업의 성장은 단순히 자금을 확보하는 것에서 끝나지 않습니다. 
+            올바른 전략과 실행, 그리고 지속적인 관리가 필요합니다. 
+            이든플로우는 AI 기술과 축적된 노하우로 귀사의 성장을 완벽히 지원하겠습니다."
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
