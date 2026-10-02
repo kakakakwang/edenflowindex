@@ -168,26 +168,6 @@ footer img{height:18px;width:auto;opacity:.9;margin-bottom:4px}
     <p><strong>010-4847-0692</strong> 번호로 1일 이내에 전화드립니다. 모르는 번호로 보일 수 있으니 저장해 두시면 놓치지 않으세요. 통화 전에 아래에서 저희가 어떤 일을 하는지, 사장님이 어디에 해당되는지 미리 보실 수 있습니다.</p>
   </div>
 
-  <div class="hero">
-    <img src="img/ceo.jpg" alt="이든플로우 여광 대표">
-    <div>
-      <p class="eyebrow">정책자금 · 정부지원사업 · 기업인증</p>
-      <h1 class="name">여광</h1>
-      <p class="role">이든플로우 대표이사 · 정책지도사</p>
-      <p class="line">세무는 세무사가, <strong>지원금은 정책자금 전문가</strong>가 챙깁니다.</p>
-    </div>
-  </div>
-
-  <div class="contact">
-    <a class="btn primary" href="tel:01048470692">전화하기</a>
-    <a class="btn" href="https://edenflow.kr" target="_blank" rel="noopener">이든플로우 홈페이지</a>
-  </div>
-  <div class="numrow">
-    <span class="num" id="phone">010-4847-0692</span>
-    <span class="small muted">edenflow3@gmail.com</span>
-    <button class="copy" type="button" data-copy="010-4847-0692">번호 복사</button>
-  </div>
-
   <section class="stack-sec no3d" id="stackSec" aria-labelledby="stackTitle">
     <div class="stack-head">
       <p class="eyebrow">이든플로우가 일하는 방식</p>
@@ -212,6 +192,27 @@ footer img{height:18px;width:auto;opacity:.9;margin-bottom:4px}
     </div>
     <p class="basis">2026년 9월 기준</p>
   </section>
+
+  <div class="hero">
+    <img src="img/ceo.jpg" alt="이든플로우 여광 대표">
+    <div>
+      <p class="eyebrow">정책자금 · 정부지원사업 · 기업인증</p>
+      <h1 class="name">여광</h1>
+      <p class="role">이든플로우 대표이사 · 정책지도사</p>
+      <p class="line">세무는 세무사가, <strong>지원금은 정책자금 전문가</strong>가 챙깁니다.</p>
+    </div>
+  </div>
+
+  <div class="contact">
+    <a class="btn primary" href="tel:01048470692">전화하기</a>
+    <a class="btn" href="https://edenflow.kr" target="_blank" rel="noopener">이든플로우 홈페이지</a>
+  </div>
+  <div class="numrow">
+    <span class="num" id="phone">010-4847-0692</span>
+    <span class="small muted">edenflow3@gmail.com</span>
+    <button class="copy" type="button" data-copy="010-4847-0692">번호 복사</button>
+  </div>
+
 
   <section>
     <div class="sec-head">
@@ -388,21 +389,21 @@ footer img{height:18px;width:auto;opacity:.9;margin-bottom:4px}
     draw(true);
   }
 
-  var gap=reduce?0.92:0.2, target=0.92, start=performance.now(), tilt=0, tiltT=0;
+  var gap=reduce?0.92:0.2, target=0.92, start=0, tilt=0, tiltT=0, spin=0, spinT=0;
   var v=new THREE.Vector3();
   function layout(t){
     var stackH=(N-1)*gap;
     for(var i=0;i<N;i++) plates[i].position.y=center.y-stackH/2+i*gap;
     var sway=reduce?0:Math.sin(t*0.00035)*0.12;
-    group.rotation.y=-0.08+sway+tilt;
+    group.rotation.y=-0.08+sway+tilt+spin;
     var u=reduce?0.5:(t*0.00012)%1, q=pathPoint(u);
     dot.position.set(q[0], plates[4].position.y+T+0.09, q[1]);
   }
   function draw(force){
     var t=performance.now();
     if(!reduce){
-      var e=Math.min(1,Math.max(0,(t-start-350)/1500)); e=e<.5?4*e*e*e:1-Math.pow(-2*e+2,3)/2;
-      gap=0.2+(target-0.2)*e; tilt+=(tiltT-tilt)*0.06;
+      var e=start?Math.min(1,Math.max(0,(t-start-250)/1400)):0; e=e<.5?4*e*e*e:1-Math.pow(-2*e+2,3)/2;
+      gap=0.2+(target-0.2)*e; tilt+=(tiltT-tilt)*0.06; spin+=(spinT-spin)*0.08;
     }
     layout(t);
     renderer.render(scene,cam);
@@ -423,20 +424,23 @@ footer img{height:18px;width:auto;opacity:.9;margin-bottom:4px}
   function loop(){ raf=0; if(!visible||document.hidden) return; draw(); raf=requestAnimationFrame(loop); }
   function kick(){ if(!reduce&&!raf) raf=requestAnimationFrame(loop); }
   if('IntersectionObserver' in window){
-    new IntersectionObserver(function(es){ visible=es[0].isIntersecting; if(visible) kick(); },{threshold:0.05}).observe(stage);
+    new IntersectionObserver(function(es){ visible=es[0].isIntersecting; if(visible){ if(!start&&es[0].intersectionRatio>0.25) start=performance.now(); kick(); } },{threshold:[0,0.05,0.25,0.5]}).observe(stage);
   }
   document.addEventListener('visibilitychange',kick);
   stage.addEventListener('pointermove',function(ev){ if(ev.pointerType!=='mouse') return; var r=stage.getBoundingClientRect(); tiltT=((ev.clientX-r.left)/r.width-0.5)*0.35; });
   stage.addEventListener('pointerleave',function(){ tiltT=0; });
-  // open the stack a little wider while it scrolls through the screen
-  window.addEventListener('scroll',function(){ if(reduce) return; var r=stage.getBoundingClientRect(), vh=window.innerHeight||1;
-    var p=1-Math.min(1,Math.max(0,(r.top+r.height/2)/vh)); target=0.86+p*0.2; },{passive:true});
+  // scroll scrub: the stack opens wider and turns as the reader scrolls past it
+  function onScroll(){ if(reduce) return; var r=stage.getBoundingClientRect(), vh=window.innerHeight||1;
+    var p=Math.min(1,Math.max(0,(vh-r.top)/(vh+r.height)));
+    if(!start&&r.top<vh*0.8) start=performance.now();
+    target=0.62+p*0.53; spinT=(p-0.35)*0.9; kick(); }
+  window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',resize);
   var mq=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)');
   if(mq&&mq.addEventListener) mq.addEventListener('change',function(){ build(); draw(true); });
   new MutationObserver(function(){ build(); draw(true); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ build(); resize(); });
-  resize(); kick();
+  resize(); onScroll(); if(!('IntersectionObserver' in window)) start=performance.now(); kick();
 })();
 </script>
 <script>
