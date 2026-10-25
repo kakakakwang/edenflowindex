@@ -1,0 +1,14 @@
+[홈페이지]
+<a href="https://edenflow.kr" target="_blank"><img src="https://edenflow.kr/blogskin/btn_home.png" width="170" height="180" border="0" alt="홈페이지" /></a>
+
+[카톡 상담]
+<a href="https://open.kakao.com/o/sFYpJcXh" target="_blank"><img src="https://edenflow.kr/blogskin/btn_kakao.png" width="170" height="180" border="0" alt="카톡 상담" /></a>
+
+[지원사업]
+<a href="https://blog.naver.com/PostList.naver?blogId=edenflow&from=postList&categoryNo=6" target="_top"><img src="https://edenflow.kr/blogskin/btn_fund.png" width="170" height="180" border="0" alt="지원사업" /></a>
+
+[기업인증]
+<a href="https://blog.naver.com/PostList.naver?blogId=edenflow&from=postList&categoryNo=7" target="_top"><img src="https://edenflow.kr/blogskin/btn_cert.png" width="170" height="180" border="0" alt="기업인증" /></a>
+
+[마케팅]
+<a href="https://blog.naver.com/PostList.naver?blogId=edenflow&from=postList&categoryNo=8" target="_top"><img src="https://edenflow.kr/blogskin/btn_mkt.png" width="170" height="180" border="0" alt="마케팅" /></a>
